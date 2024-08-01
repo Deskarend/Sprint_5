@@ -40,3 +40,9 @@ class BasePage:
         self.driver.get(self.URL)
         WebDriverWait(self.driver, 5).until(
             expected_conditions.visibility_of_any_elements_located(self.IMG_INGREDIENTS))
+
+    def is_displayed(self):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.visibility_of_any_elements_located(BasePage.IMG_INGREDIENTS))
+        self.driver.find_element(*BasePage.BUTTON_ORDER)
+        return 1
