@@ -2,6 +2,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+from pages.account_page import AccountPage
+from pages.login_page import LoginPage
+
 
 class BasePage:
     # УРЛ страницы
@@ -46,3 +49,26 @@ class BasePage:
             expected_conditions.visibility_of_any_elements_located(BasePage.IMG_INGREDIENTS))
         self.driver.find_element(*BasePage.BUTTON_ORDER)
         return 1
+
+    def click_button_login(self):
+        self.driver.find_element(*BasePage.BUTTON_LOGIN).click()
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))
+
+    def click_button_account(self):
+        self.driver.find_element(*BasePage.BUTTON_ACCOUNT).click()
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(AccountPage.PROFILE_TAB))
+
+    def sauces_is_displayed(self):
+        self.driver.find_element(*BasePage.SAUCE_BANNER).is_displayed()
+        self.driver.find_element(*BasePage.SAUCE_LIST).is_displayed()
+        return "type_current" in self.driver.find_element(*BasePage.SECTION_SAUCES).get_attribute('class')
+
+    def filling_is_displayed(self):
+        self.driver.find_element(*BasePage.FILLING_BANNER).is_displayed()
+        self.driver.find_element(*BasePage.FILLING_LIST).is_displayed()
+        return "type_current" in self.driver.find_element(*BasePage.SECTION_FILLING).get_attribute('class')
+
+    def buns_is_displayed(self):
+        self.driver.find_element(*BasePage.BUN_BANNER).is_displayed()
+        self.driver.find_element(*BasePage.BUN_LIST).is_displayed()
+        return "type_current" in self.driver.find_element(*BasePage.SECTION_BUNS).get_attribute('class')
