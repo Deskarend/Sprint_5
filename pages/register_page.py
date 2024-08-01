@@ -2,6 +2,8 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
 
+from pages.login_page import LoginPage
+
 
 class RegisterPage:
     # УРЛ страницы
@@ -34,3 +36,13 @@ class RegisterPage:
         self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
         self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
         self.driver.find_element(*self.REGISTER_BUTTON).click()
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))
+
+    def error_massage_is_displayed(self):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.visibility_of_element_located(RegisterPage.PASSWORD_ERROR))
+        return 1
+
+    def click_button_login(self):
+        self.driver.find_element(*RegisterPage.BUTTON_LOGIN).click()
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))
