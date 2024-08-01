@@ -34,3 +34,21 @@ class RegisterPage:
         self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
         self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
         self.driver.find_element(*self.REGISTER_BUTTON).click()
+        from pages.login_page import LoginPage
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))
+
+    def register_try(self, name, email, password):
+        self.driver.find_element(*self.NAME_INPUT).send_keys(name)
+        self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
+        self.driver.find_element(*self.PASSWORD_INPUT).send_keys(password)
+        self.driver.find_element(*self.REGISTER_BUTTON).click()
+
+    def error_massage_is_displayed(self):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.visibility_of_element_located(RegisterPage.PASSWORD_ERROR))
+        return 1
+
+    def click_button_login(self):
+        self.driver.find_element(*RegisterPage.BUTTON_LOGIN).click()
+        from pages.login_page import LoginPage
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))

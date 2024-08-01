@@ -46,3 +46,43 @@ class BasePage:
             expected_conditions.visibility_of_any_elements_located(BasePage.IMG_INGREDIENTS))
         self.driver.find_element(*BasePage.BUTTON_ORDER)
         return 1
+
+    def click_button_login(self):
+        self.driver.find_element(*BasePage.BUTTON_LOGIN).click()
+        from pages.login_page import LoginPage
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))
+
+    def click_button_account_before_login(self):
+        self.driver.find_element(*BasePage.BUTTON_ACCOUNT).click()
+        from pages.login_page import LoginPage
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))
+
+    def click_button_account_after_login(self):
+        self.driver.find_element(*BasePage.BUTTON_ACCOUNT).click()
+        from pages.login_page import LoginPage
+        from pages.account_page import AccountPage
+        WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(AccountPage.PROFILE_TAB))
+
+    def sauces_is_displayed(self):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.text_to_be_present_in_element_attribute(BasePage.SECTION_SAUCES, 'class',
+                                                                        'type_current'))
+        self.driver.find_element(*BasePage.SAUCE_BANNER).is_displayed()
+        self.driver.find_element(*BasePage.SAUCE_LIST).is_displayed()
+        return 1
+
+    def filling_is_displayed(self):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.text_to_be_present_in_element_attribute(BasePage.SECTION_FILLING, 'class',
+                                                                        'type_current'))
+        self.driver.find_element(*BasePage.FILLING_BANNER).is_displayed()
+        self.driver.find_element(*BasePage.FILLING_LIST).is_displayed()
+        return 1
+
+    def buns_is_displayed(self):
+        WebDriverWait(self.driver, 5).until(
+            expected_conditions.text_to_be_present_in_element_attribute(BasePage.SECTION_BUNS, 'class',
+                                                                        'type_current'))
+        self.driver.find_element(*BasePage.BUN_BANNER).is_displayed()
+        self.driver.find_element(*BasePage.BUN_LIST).is_displayed()
+        return 1
