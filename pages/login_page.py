@@ -12,10 +12,10 @@ class LoginPage:
     # форма входа
     LOGIN_FORM = (By.XPATH, ".//h2[text()='Вход']")
     # Поле ввода email
-    EMAIL_INPUT = (By.XPATH, ".//form//fieldset[1]//input")
+    EMAIL_INPUT = (By.XPATH, ".//label[contains(text(), 'Email')]")
     # Поле ввода пароля
-    PASSWORD_INPUT = (By.XPATH, ".//form//fieldset[2]//input")
-    BUTTON_LOGIN = (By.XPATH, ".//form//button")
+    PASSWORD_INPUT = (By.XPATH, ".//label[contains(text(), 'Пароль')]")
+    BUTTON_LOGIN = (By.XPATH, ".//button[contains(text(), 'Войти')]")
 
     def __init__(self, driver):
         self.driver = driver
