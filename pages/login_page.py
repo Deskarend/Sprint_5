@@ -21,6 +21,7 @@ class LoginPage:
         self.driver.get(self.URL)
         WebDriverWait(self.driver, 5).until(
             expected_conditions.visibility_of_element_located(self.LOGIN_FORM))
+        return self.driver
 
     def login(self, email, password):
         self.driver.find_element(*self.EMAIL_INPUT).send_keys(email)
@@ -28,8 +29,8 @@ class LoginPage:
         self.driver.find_element(*self.BUTTON_LOGIN).click()
         from pages.base_page import BasePage
         WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(BasePage.BUTTON_ORDER))
-        return 1
+        return self.driver
 
     def is_displayed(self):
         WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))
-        return 1
+        return self.driver
