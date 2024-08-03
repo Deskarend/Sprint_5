@@ -18,8 +18,10 @@ class ForgotPasswordPage:
         self.driver.get(self.URL)
         WebDriverWait(self.driver, 5).until(
             expected_conditions.visibility_of_element_located(self.FORGOT_PASSWORD_FORM))
+        return self.driver
 
     def click_button_login(self):
         self.driver.find_element(*ForgotPasswordPage.BUTTON_LOGIN).click()
         from pages.login_page import LoginPage
         WebDriverWait(self.driver, 5).until(expected_conditions.visibility_of_element_located(LoginPage.LOGIN_FORM))
+        return self.driver

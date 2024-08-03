@@ -35,8 +35,9 @@ class AccountPage:
         self.driver.get(self.URL)
         WebDriverWait(self.driver, 5).until(
             expected_conditions.visibility_of_any_elements_located(self.PROFILE_TAB))
+        return self.driver
 
     def is_displayed(self):
         WebDriverWait(self.driver, 5).until(
             expected_conditions.visibility_of_any_elements_located(AccountPage.PROFILE_TAB))
-        return 1
+        return self.driver
